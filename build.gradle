@@ -20,3 +20,13 @@ allprojects {
         google()
     }
 }
+
+task testProjectTask(
+        dependsOn: [":backend:appengineStart",
+                    ":app:connectedAndroidTest",
+                    ':backend:appengineStop']) {
+    group = 'mytasks'
+    doLast {
+        println 'testProjectTask completed'
+    }
+}
