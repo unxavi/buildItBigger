@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger.free;
+package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +12,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.udacity.gradle.builditbigger.JokeAsyncTask;
-import com.udacity.gradle.builditbigger.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
