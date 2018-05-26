@@ -1,5 +1,4 @@
-package com.udacity.gradle.builditbigger.paid;
-
+package com.udacity.gradle.builditbigger.free;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.udacity.gradle.builditbigger.JokeAsyncTask;
 import com.udacity.gradle.builditbigger.R;
 
@@ -26,6 +27,8 @@ import unxavi.com.github.jokedisplayandroidlib.JokeDisplayActivity;
 public class MainActivityFragment extends Fragment implements JokeAsyncTask.JokeListener {
 
     Unbinder unbinder;
+
+    private InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
     }
@@ -48,6 +51,26 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        createInterstitial();
+    }
+
+    private void createInterstitial() {
+        if (getContext() != null) {
+            mInterstitialAd = new InterstitialAd(getContext());
+            mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    new JokeAsyncTask().execute(MainActivityFragment.this);
+                }
+            });
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -55,8 +78,17 @@ public class MainActivityFragment extends Fragment implements JokeAsyncTask.Joke
 
     @OnClick(R.id.tellJokeBtn)
     public void onViewClicked() {
-        new JokeAsyncTask().execute(this);
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            loadJoke();
+        }
 
+
+    }
+
+    private void loadJoke() {
+        new JokeAsyncTask().execute(this);
     }
 
     @Override

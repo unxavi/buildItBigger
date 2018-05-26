@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.udacity.gradle.builditbigger.paid.MainActivityFragment;
+import com.udacity.gradle.builditbigger.free.MainActivityFragment;
 
 import butterknife.ButterKnife;
 

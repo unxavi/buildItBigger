@@ -52,9 +52,11 @@ public class JokeAsyncTask extends AsyncTask<JokeAsyncTask.JokeListener, Void, S
 
     @Override
     protected void onPostExecute(String joke) {
-        JokeListener jokeListener = weakReferenceListener.get();
-        if (jokeListener != null) {
-            jokeListener.onGetJoke(joke);
+        if (weakReferenceListener != null) {
+            JokeListener jokeListener = weakReferenceListener.get();
+            if (jokeListener != null) {
+                jokeListener.onGetJoke(joke);
+            }
         }
     }
 }
