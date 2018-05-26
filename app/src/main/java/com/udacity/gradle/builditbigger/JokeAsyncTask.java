@@ -36,12 +36,12 @@ public class JokeAsyncTask extends AsyncTask<JokeAsyncTask.JokeListener, Void, S
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
                     });
-            // end options for devappserver
-            JokeListener jokeListener = params[0];
-            this.weakReferenceListener = new WeakReference<>(jokeListener);
             myApiService = builder.build();
         }
 
+        // end options for devappserver
+        JokeListener jokeListener = params[0];
+        this.weakReferenceListener = new WeakReference<>(jokeListener);
 
         try {
             return myApiService.joke().execute().getData();
