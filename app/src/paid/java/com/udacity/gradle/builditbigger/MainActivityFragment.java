@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger.paid;
+package com.udacity.gradle.builditbigger;
 
 
 import android.content.Intent;
@@ -8,9 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.udacity.gradle.builditbigger.JokeAsyncTask;
-import com.udacity.gradle.builditbigger.R;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
