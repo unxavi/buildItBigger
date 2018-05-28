@@ -21,11 +21,15 @@ public class JokeDisplayActivity extends AppCompatActivity {
         jokeTv = findViewById(R.id.jokeTv);
         setSupportActionBar(toolbar);
 
-        String joke = getIntent().getStringExtra(JOKE_KEY);
-        if(TextUtils.isEmpty(joke)){
+        if (getIntent() != null) {
+            String joke = getIntent().getStringExtra(JOKE_KEY);
+            if (TextUtils.isEmpty(joke)) {
+                closeOnError();
+            } else {
+                jokeTv.setText(joke);
+            }
+        } else {
             closeOnError();
-        }else{
-            jokeTv.setText(joke);
         }
     }
 
